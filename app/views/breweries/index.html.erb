@@ -16,7 +16,7 @@
   <tbody>
     <% @breweries.each do |brewery| %>
       <tr>
-        <td><%= link_to "#{brewery.name}", brewery %></td>
+        <td><%= link_to brewery.name, brewery %></td>
         <td><%= brewery.year %></td>
         <td><%= link_to 'Edit', edit_brewery_path(brewery) %></td>
         <td><%= link_to 'Destroy', brewery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,7 +24,7 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
+<br/>
 <%= link_to 'New Brewery', new_brewery_path %>
+<br/>
+<%= link_to 'List of beers', beers_path %>
