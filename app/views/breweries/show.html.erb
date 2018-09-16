@@ -12,6 +12,12 @@
     <li><%= link_to "#{beer.name}", beer %></li>
   <% end %>
   </ul>
+  <% if @brewery.ratings.empty? %>
+    No rating                
+  <% else %>                   
+    Has <%= pluralize(@brewery.ratings.length, "rating")%>, average <%= @brewery.average_rating %>
+  <% end %>
+  <br/>
 </p>
 
 <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
