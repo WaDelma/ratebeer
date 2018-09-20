@@ -1,7 +1,7 @@
 module RatingAverage
-    extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-    def average_rating                                                      
-        return self.ratings.map {|r| r.score}.sum.to_f / self.ratings.length
-    end
+  def average_rating
+    ratings.map(&:score).sum.to_f / ratings.length
+  end
 end
