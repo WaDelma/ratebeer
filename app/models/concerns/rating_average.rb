@@ -6,5 +6,6 @@ module RatingAverage
       0
     else
       ratings.map(&:score).sum.to_f / ratings.length
+    end
   end
 end
