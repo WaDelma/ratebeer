@@ -15,7 +15,6 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
-    current_user = User.find_by id: session[:user_id]
     @beer_clubs = BeerClub.where.not id: current_user.beer_clubs
   end
 
@@ -27,7 +26,6 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     @membership = Membership.new(membership_params)
-    current_user = User.find_by id: session[:user_id]
     respond_to do |format|
       if @membership.save
         format.html { redirect_to current_user, notice: 'Joining to the club was successfull.' }
@@ -71,6 +69,6 @@ class MembershipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_params
-      params.require(:membership).permit(:beer_club_id).merge!(user_id: session[:user_id])
+      params.require(:membership).permit(:beer_club_id).merge!(user_id: current_user.id)
     end
 end
