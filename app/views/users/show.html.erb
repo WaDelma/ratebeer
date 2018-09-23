@@ -7,6 +7,17 @@
   <%= @user.average_rating %>
 </p>
 
+<% if not @clubs.empty? %>
+<p>
+  <h3>Clubs:</h3>
+  <ul>
+  <% @clubs.each do |club| %>
+    <li><%= link_to club, club %></li>
+  <% end %>
+  </ul>
+</p>
+<% end %>
+
 <p>
   <h3>Ratings:</h3>
   <ul>
