@@ -16,7 +16,7 @@ class RatingsController < ApplicationController
     else
       @beers = Beer.all
       render :new
-    end 
+    end
   end
 
   def destroy
