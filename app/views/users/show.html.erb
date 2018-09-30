@@ -5,7 +5,7 @@
   <%= @user.ratings.length %> ratings made with average <%= @user.average_rating %>.
   <br/>
   <% if @user.favorite_style %>
-    The favorite style of beer is <%= @user.favorite_style %>
+    The favorite style of beer is <%= @user.favorite_style %> and favorite brewery is <%= @user.favorite_brewery.name %>
   <% end %>
 </p>
 

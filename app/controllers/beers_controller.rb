@@ -1,5 +1,6 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
+  before_action :set_data
 
   # GET /beers
   # GET /beers.json
@@ -63,11 +64,14 @@ class BeersController < ApplicationController
 
   private
 
+  def set_data
+    @breweries = Brewery.all
+    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_beer
     @beer = Beer.find(params[:id])
-    @breweries = Brewery.all
-    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

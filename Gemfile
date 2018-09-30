@@ -43,6 +43,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :test do
   gem 'factory_bot_rails'
+  gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
