@@ -1,0 +1,8 @@
+language: ruby
+
+rvm:
+- 2.5.1
+
+script:
+- bundle exec rails db:migrate 
+- bundle exec rspec -fd spec
