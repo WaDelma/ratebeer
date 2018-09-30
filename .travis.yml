@@ -1,8 +1,12 @@
 language: ruby
-
 rvm:
 - 2.5.1
-
 script:
-- bundle exec rails db:migrate 
+- bundle exec rails db:migrate
 - bundle exec rspec -fd spec
+deploy:
+  provider: heroku
+  app: tallybeverage
+  run: "rails db:migrate"
+  api_key:
+    secure: DsDloFMl3Uiu+QdtdeyOPTMCVM7egBht2y6Xgt3PVW0nnNto0CrsZNqPz5kf1haIPbk/zmQuHCG6k0mJy6/H7spfXN9tuvlagIQDJveobQTKrQ7XYFPh/ZODMC640nf8/59ZzQW/HTK6x4WoxNvRJKZ+0afICGQ4RcRyLvSDg+/YwM4CVUxBiF3V8uIAgLXnKntQD2gUQZnm/UKIdaOLzEgv/n2HCyTYmaBMhmZOttnu8QidGO2iiv2L03KkIiTa6r9lXMBy0EZ/QqatJOKAKrhOI9/CyAa7eNwNWxG/SZgz9SwuucOJ68mvC4Y9vdTgKoC0hdl3WW743K7wTfgClefTdYG8Ng+hyqpQaFG8M7eJEyUonoBNZyC0kck9OVFgGWajc8jzhgbRc8lQnXxDQXACg/vBkZNfVbIAyLLxlpOVIg8C/7bCvcauidgUOeBcV72FYMxoA2fXpwkzODR106V9uDW7vk4YyYIxotoJ3xxCvMHBhI/4kqN0KcUo1baUOZd+eeFpJdc5KcWIr2arNHjR+glb5yE9xR2wb8OC7KCcRBNTGKYrjoGtZPTR1zx0fBZwPyKeHtWwX9gy0nUzlFV81z0muVkwM+JKmUPt+3GrCYVbRbi2gzsv0XaxAVHUxFHD7qB1cIrdPVp5JOHGxPUBgGJhNsAbFljL2iUdR3I=
