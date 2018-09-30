@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe "Beers page" do
+  let!(:user) { FactoryBot.create :user }
+  
   before :each do
     @breweries = ["Koff", "Karjala", "Schlenkerla"]
     year = 1896
@@ -8,7 +10,7 @@ describe "Beers page" do
       FactoryBot.create(:brewery, name: brewery_name, year: year += 1)
     end
 
-    visit breweries_path
+    sign_in(username:"Pekka", password:"Foobar1")
   end
 
   it "allows creating new beer with valid name adding it to the system" do

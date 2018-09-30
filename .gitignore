@@ -19,6 +19,7 @@
 !/tmp/.keep
 
 /node_modules
+/coverage
 /yarn-error.log
 
 .byebug_history
