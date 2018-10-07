@@ -10,6 +10,8 @@ describe "Beers page" do
       FactoryBot.create(:brewery, name: brewery_name, year: year += 1)
     end
 
+    FactoryBot.create(:style)
+
     sign_in(username:"Pekka", password:"Foobar1")
   end
 

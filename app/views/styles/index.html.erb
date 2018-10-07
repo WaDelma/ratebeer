@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Styles</h1>
+
+<% @styles.each do |style| %>
+    <h2><%= style.name %></h2>
+    <%= style.description %>
+    <b>Beers:</b>
+    <ul>
+        <% style.beers.each do |beer| %>
+            <li><%= beer %></li>
+        <% end %>
+    </ul>
+<% end %>

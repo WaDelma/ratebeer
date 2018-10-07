@@ -6,7 +6,8 @@ RSpec.describe Beer, type: :model do
     let(:test_brewery) { FactoryBot.create(:brewery) }
 
     it "and with both name and style is saved" do
-      beer = Beer.create name: "Generic", style: "IPA", brewery: test_brewery
+      style = FactoryBot.create :style
+      beer = Beer.create name: "Generic", style: style, brewery: test_brewery
 
       expect(beer).to be_valid
       expect(Beer.count).to eq(1)
@@ -19,7 +20,8 @@ RSpec.describe Beer, type: :model do
     end
 
     it "and style, but without name isn't saved" do
-      beer = Beer.create style: "IPA", brewery: test_brewery
+      style = FactoryBot.create :style
+      beer = Beer.create style: style, brewery: test_brewery
       expect(beer).not_to be_valid
       expect(Beer.count).to eq(0)
     end

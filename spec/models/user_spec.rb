@@ -72,6 +72,9 @@ RSpec.describe User, type: :model do
 
   describe "favorite style" do
     let(:user){ FactoryBot.create(:user) }
+    let(:ipa){ FactoryBot.create(:style, name: "IPA") }
+    let(:lager){ FactoryBot.create(:style, name: "Lager")  }
+    let(:porter){ FactoryBot.create(:style, name: "Porter")  }
   
     it "has method for determining one" do
       expect(user).to respond_to(:favorite_style)
@@ -87,22 +90,22 @@ RSpec.describe User, type: :model do
     end
 
     it "is the most rated of multiple styles" do
-      create_beer_with_rating({user: user, style: "IPA"}, 1)
-      beer = create_beer_with_rating({user: user, style: "Lager"}, 4)
-      create_beer_with_rating({user: user, style: "Porter"}, 2)
+      create_beer_with_rating({user: user, style: ipa}, 1)
+      beer = create_beer_with_rating({user: user, style: lager}, 4)
+      create_beer_with_rating({user: user, style: porter}, 2)
       expect(user.favorite_style).to eq(beer.style)
     end
 
     it "has the largest average rating" do
-      beer = create_beer_with_rating({user: user, style: "Lager"}, 26)
-      create_beers_with_many_ratings({user: user, style: "Porter"}, 50, 1)
+      beer = create_beer_with_rating({user: user, style: lager}, 26)
+      create_beers_with_many_ratings({user: user, style: porter}, 50, 1)
       expect(user.favorite_style).to eq(beer.style)
     end
 
     it "has the largest average rating which near the average of different style" do
-      create_beers_with_many_ratings({user: user, style: "Porter"}, 2, 1, 1, 1, 1)
-      create_beers_with_many_ratings({user: user, style: "Lager"}, 1, 1, 1, 1)
-      beer = create_beer_with_rating({user: user, style: "Lager"}, 3)
+      create_beers_with_many_ratings({user: user, style: porter}, 2, 1, 1, 1, 1)
+      create_beers_with_many_ratings({user: user, style: lager}, 1, 1, 1, 1)
+      beer = create_beer_with_rating({user: user, style: lager}, 3)
       expect(user.favorite_style).to eq(beer.style)
     end
   end
