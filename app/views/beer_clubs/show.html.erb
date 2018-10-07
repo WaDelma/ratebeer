@@ -15,6 +15,18 @@
 <p>
 
 <% if current_user %>
-<%= link_to('Edit', edit_beer_club_path(@beer_club)) %> |
+  <% if @member %>  
+    <%= form_for(@membership, method: "delete") do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value: "End the membership" %>
+    <% end %>
+  <% else %>
+    <%= form_for(@membership) do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value:"Join the club" %>
+    <% end %>
+  <% end %>
+
+  <%= link_to('Edit', edit_beer_club_path(@beer_club)) %> |
 <% end %>
 <%= link_to 'Back', beer_clubs_path %>

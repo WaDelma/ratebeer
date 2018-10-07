@@ -28,7 +28,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.new(membership_params)
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to current_user, notice: 'Joining to the club was successfull.' }
+        format.html { redirect_to @membership.beer_club, notice: "#{current_user.username} welcome to the club!" }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class MembershipsController < ApplicationController
   def destroy
     @membership.destroy
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Leaving the club was successfull.' }
+      format.html { redirect_to current_user, notice: "Membership in #{@membership.beer_club.name} ended." }
       format.json { head :no_content }
     end
   end

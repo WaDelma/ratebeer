@@ -18,6 +18,7 @@ group :production do
    gem 'rails_12factor'
 end
 
+gem 'httparty'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -45,6 +46,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 group :development, :test do
