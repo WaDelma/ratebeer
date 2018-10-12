@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 include Helpers
 
 describe "Rating" do
@@ -35,9 +34,9 @@ describe "Rating" do
     
     visit ratings_path
 
-    expect(page).to have_content 'Number of ratings: 5'
+    expect(page).to have_content "Number of ratings: #{scores.count}"
     scores.each do |score|
-      expect(page).to have_content beer1.to_s + ": " + score.to_s + ' Pekka'
+      expect(page).to have_content "#{score} #{beer1}"
     end
   end
 
@@ -49,13 +48,13 @@ describe "Rating" do
     visit user_path(user)
 
     expect{
-      find_link(href: "/ratings/3" ).click
+      find('form[action="/ratings/3"]').find('input[type="submit"]').click
     }.to change{Rating.count}.by(-1)
 
     scores.delete(7)
     scores.each do |score|
-      expect(page).to have_content beer1.to_s + ": " + score.to_s
+      expect(page).to have_content "#{beer1}: #{score}"
     end
-    expect(page).not_to have_content beer1.to_s + ": 7"
+    expect(page).not_to have_content "#{beer1}: 7"
   end
 end
