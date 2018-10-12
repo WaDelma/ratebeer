@@ -1,23 +1,21 @@
-
 <% if @place %>
+  <h1><%= @place.name %></h1>
+  <p>
+    Is a <%= @place.status.downcase %> that resides in <%= @place.street %>, <%= @place.city %>, <%= @place.country %>
+  </p>
 
-<p>
-  <h2><%= @place.name %></h2>
-  Is a <%= @place.status.downcase %> that resides in <%= @place.street %>, <%= @place.city %>, <%= @place.country %>
-</p>
+  <% if @place.phone %>
+    <p>
+      <b>Phone:</b> <%= @place.phone %> 
+    </p>
+  <% end %>
 
-<% if @place.phone %>
-<p>
-  <b>Phone:</b> <%= @place.phone %> 
-</p>
-<% end %>
-
-<% if @place.url %>
-<p>
-  <%= link_to "Website", @place.url %>
-</p>
-<% end %>
+  <% if @place.url %>
+    <p>
+      <%= link_to "Website", @place.url %>
+    </p>
+  <% end %>
 
 <% else %>
-No such place
+  No such place
 <% end %>

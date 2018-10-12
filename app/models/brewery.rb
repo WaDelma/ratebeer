@@ -3,10 +3,14 @@ class Brewery < ApplicationRecord
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
   validates :name, presence: true
-  validates :year, numericality: { greater_than_or_equal_to: 1040 }
-  validate do
-    if year > Time.now.year
-      errors.add(:year, "can't be in the future")
-    end
+  validates :year, numericality: { only_integer: true,
+                                   greater_than_or_equal_to: 1040,
+                                   less_than_or_equal_to: ->(_) { Time.now.year } }
+
+  scope :active, -> { where active: true }
+  scope :retired, -> { where active: [nil, false] }
+
+  def to_s
+    name.to_s
   end
 end

@@ -1,10 +1,10 @@
-
+<h1><%= @beer_club.name %></h1>
 
 <p>
-  <h2><%= @beer_club.name %></h2>
   Founded <%= @beer_club.founded %> at <%= @beer_club.city %>
 </p>
 
+<% if !@beer_club.members.empty? %>
 <p>
   Current members:
   <ul>
@@ -12,7 +12,8 @@
     <li><%= link_to member.username, member %></li>
   <% end %>
   </ul>
-<p>
+</p>
+<% end %>
 
 <% if current_user %>
   <p>
@@ -31,6 +32,6 @@
 <% end %>
 
 <div>
-  <%= link_to 'Edit', edit_beer_club_path(@beer_club), class:"btn btn-primary" if current_user %>
+  <%= edit_and_destroy_buttons(@beer_club) %>
   <%= link_to 'Back', beer_clubs_path, class:"btn btn-primary" %>
 </div>

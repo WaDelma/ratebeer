@@ -1,7 +1,15 @@
-
 <h1>Sign in</h1>
+
 <%= form_tag session_path do %>
-  username <%= text_field_tag :username, params[:username] %>
-  password <%= password_field_tag :password, params[:password] %>
-  <%= submit_tag "Log in" %>
+  <div class="field form-group row">
+    <%= label_tag :username, "Username", class: "col-sm-2 col-form-label" %>
+    <%= text_field_tag :username, params[:username], class:"col-sm-7" %>
+  </div>
+  <div class="field form-group row">
+    <%= label_tag :password, "Password", class: "col-sm-2 col-form-label" %>
+    <%= password_field_tag :password, params[:password], class:"col-sm-7" %>
+  </div>
+  <div class="actions form-group row">
+    <%= submit_tag "Log in", class:"btn btn-primary" %>
+  </div>
 <% end %>

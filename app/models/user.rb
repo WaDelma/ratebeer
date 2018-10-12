@@ -11,10 +11,18 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
 
+  def to_s
+    username
+  end
+
   def favorite_beer
     return nil if ratings.empty?
 
     ratings.order(score: :desc).limit(1).first.beer
+  end
+
+  def self.most_rated(nth)
+    all.map.sort_by{ |b| -b.ratings.count }.take(nth)
   end
 
   def favorite_style

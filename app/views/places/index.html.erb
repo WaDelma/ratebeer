@@ -1,9 +1,13 @@
-
-<h2>Search for place</h2>
+<h1>Search for place</h1>
 
 <%= form_tag places_path do %>
-  city <%= text_field_tag :city, params[:city] %>
-  <%= submit_tag "Search" %>
+  <div class="field form-group row">
+    <%= label_tag :city, "City", class: "col-sm-2 col-form-label" %>
+    <%= text_field_tag :city, params[:city], class:"col-sm-7" %>
+  </div>
+  <div class="actions form-group row">
+    <%= submit_tag "Search", class:"btn btn-primary" %>
+  </div>
 <% end %>
 
 <% if @places %>

@@ -1,7 +1,10 @@
-
-
 <p>
-  <h2><%= @brewery.name %></h2>
+  <h1>
+    <%= @brewery.name %>
+    <% if not @brewery.active  %>
+      <span class="badge badge-info">retired</span>
+    <% end %>
+  </h1>
   <em>Established at <%= @brewery.year %></em>
 </p>
 <p>
@@ -15,12 +18,11 @@
   <% if @brewery.ratings.empty? %>
     No rating                
   <% else %>                   
-    Has <%= pluralize(@brewery.ratings.length, "rating")%>, average <%= @brewery.average_rating %>
+    Has <%= pluralize(@brewery.ratings.length, "rating")%>, average <%= round @brewery.average_rating %>
   <% end %>
   <br/>
 </p>
 
-<% if current_user %>
-<%= link_to 'Edit', edit_brewery_path(@brewery), class:"btn btn-primary" %>
-<% end %>
+<%= edit_and_destroy_buttons(@brewery) %>
+<%= link_to "Change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" %>
 <%= link_to 'Back', breweries_path, class:"btn btn-primary" %>

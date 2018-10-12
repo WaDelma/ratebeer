@@ -2,9 +2,13 @@ Rails.application.routes.draw do
   root 'breweries#index'
   resources :memberships
   resources :beer_clubs
-  resources :users
+  resources :users do
+    post 'toggle_activity', on: :member
+  end
   resources :beers
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
   resources :places, only: [:index, :show]
   post 'places', to:'places#search'
   resources :ratings, only: [:index, :new, :create, :destroy]

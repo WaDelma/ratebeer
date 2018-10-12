@@ -1,5 +1,3 @@
-
-
 <h1>Users</h1>
 
 <table class="table table-hover">
@@ -14,6 +12,9 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.username, user %></td>
+        <% if admin? and not user.active %>
+          <td><span class="badge badge-info">account closed</span></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

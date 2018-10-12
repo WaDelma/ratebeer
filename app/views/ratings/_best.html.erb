@@ -1,0 +1,5 @@
+<ol>
+  <% bests.each do |candidate| %>
+    <li> <%= link_to_if respond_to?("#{candidate.model_name.singular_route_key}_path"), candidate, candidate %> with <b><%= round candidate.average_rating %></b> average rating</li>
+  <% end %>
+</ol>

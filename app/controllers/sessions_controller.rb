@@ -4,7 +4,9 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by username: params[:username]
-    if user&.authenticate(params[:password])
+    if user.authenticate(params[:password])
+      return redirect_to signin_path, notice: "The account has been suspended. Please contact administrator for further information." if !user.active
+
       session[:user_id] = user.id
       redirect_to user, notice: "Welcome back!"
     else

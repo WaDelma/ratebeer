@@ -18,7 +18,12 @@
 
   <div class="field form-group row">
     <%= form.label :year, class:"col-sm-2 col-form-label" %>
-    <%= form.number_field :year, id: :brewery_year, class:"col-sm-7" %>
+    <%= select_year(Time.current.year, start_year: 1040, end_year: Time.current.year, field_name: :year, prefix: :brewery, class:"col-sm-7") %>
+  </div>
+
+  <div class="field form-group row">
+    <%= form.label :active, class:"col-sm-2 col-form-label" %>
+    <%= form.check_box :active %>
   </div>
 
   <div class="actions form-group row">

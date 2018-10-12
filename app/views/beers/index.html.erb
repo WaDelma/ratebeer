@@ -18,14 +18,9 @@
         <td><%= link_to beer.name, beer %></td>
         <td><%= beer.style %></td>
         <td><%= link_to beer.brewery.name, beer.brewery %></td>
-        <% if current_user %>
-        <td><%= link_to 'Edit', edit_beer_path(beer), class:"btn btn-primary" %></td>
-        <td><%= button_to 'Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br/>
 <%= link_to('New Beer', new_beer_path, class:"btn btn-primary") if current_user %>
-<%= link_to 'List of breweries', breweries_path, class:"btn btn-primary" %>

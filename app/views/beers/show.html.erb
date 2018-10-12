@@ -1,26 +1,12 @@
-
-
-<p>
-  <strong>Name:</strong>
-  <%= @beer.name %>
-</p>
+<h1><%= @beer.name %></h1>
+A <%= @beer.style %> style beer made by <%= @beer.brewery %>
 
 <p>
-  <strong>Style:</strong>
-  <%= @beer.style %>
-</p>
-
-<p>
-  <strong>Brewery:</strong>
-  <%= @beer.brewery_id %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
+  <h2>Rating</h2>
   <% if @beer.ratings.empty? %>
    No rating
   <% else %>
-   <%= @beer.average_rating() %> average with <%= pluralize(@beer.ratings.length, "rating") %>
+   <%= round @beer.average_rating %> average with <%= pluralize(@beer.ratings.length, "rating") %>
   <% end %>
 </p>
 
@@ -33,7 +19,6 @@
     <%= f.submit class:"btn btn-primary" %>
   <% end %>
 
-  <%= link_to 'Edit', edit_beer_path(@beer), class:"btn btn-primary" %>
-  <%= button_to 'Destroy', @beer, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
 <% end %>
+<%= edit_and_destroy_buttons(@beer) %>
 <%= link_to 'Back', beers_path, class:"btn btn-primary" %>
