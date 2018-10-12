@@ -1,0 +1,95 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+.navibar {
+    padding: 10px;
+    background: #EFEFEF;
+}
+
+a.btn:visited {
+    color: #FFFFFF;
+}
+
+.navbar .divider-vertical {
+    height: 35px;
+    margin: 0 7px;
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.navbar-inverse .divider-vertical {
+    border-right-color: #222222;
+    border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse .nav > .divider-vertical {
+        display: none;
+     }
+}
+
+.dropdown > li {
+    display: block;
+    transition-duration: 0.5s;
+}
+
+.dropdown > li:hover {
+    cursor: pointer;
+}
+
+input.dropdown-item:hover {
+    cursor: pointer;
+}
+
+.button_to {
+    display: inline;
+    margin:0px;
+    padding:0px;
+}
+
+li:hover > .nav-link,
+li:focus-within > .nav-link {
+    background-color: #000000;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+}
+
+li.nav-item:focus-within a {
+    outline: none;
+}
+
+ul.navbar-nav li.dropdown ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 0rem;
+    left: 0;
+    display: none;
+}
+
+ul.navbar-nav li:hover > ul,
+ul.navbar-nav li:focus-within > ul,
+ul.navbar-nav li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+ul.navbar-nav li ul li {
+    clear: both;
+    width: 100%;
+}
+
+@import "bootstrap";

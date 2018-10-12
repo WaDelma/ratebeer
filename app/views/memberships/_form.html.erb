@@ -14,10 +14,13 @@
   <% if @beer_clubs.empty? %>
     No clubs to join
   <% else %>
-    <%= form.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s, selected: @membership.beer_club_id) %>  
+    <div class="field form-group row">
+      <%= form.label :beer_club_id, class:"col-sm-2 col-form-label" %>
+      <%= form.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s, selected: @membership.beer_club_id) %>
+    </div>
 
-    <div class="actions">
-      <%= form.submit %>
+    <div class="actions" form-group row>
+      <%= form.submit class:"btn btn-primary" %>
     </div>
 
   <% end %>

@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <h2><%= @brewery.name %></h2>
@@ -21,6 +21,6 @@
 </p>
 
 <% if current_user %>
-<%= link_to 'Edit', edit_brewery_path(@brewery) %> |
+<%= link_to 'Edit', edit_brewery_path(@brewery), class:"btn btn-primary" %>
 <% end %>
-<%= link_to 'Back', breweries_path %>
+<%= link_to 'Back', breweries_path, class:"btn btn-primary" %>

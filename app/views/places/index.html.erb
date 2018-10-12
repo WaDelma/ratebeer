@@ -1,4 +1,5 @@
-<p id="notice"><%= notice %></p>
+
+<h2>Search for place</h2>
 
 <%= form_tag places_path do %>
   city <%= text_field_tag :city, params[:city] %>
@@ -6,10 +7,10 @@
 <% end %>
 
 <% if @places %>
-  <table>
+  <table class="table table-hover">
     <thead>
       <% Place.rendered_fields.each do |field| %>
-        <th><%= field %></th>
+        <th><%= field.to_s.humanize %></th>
       <% end %>
     </thead>
     <% @places.each do |place| %>

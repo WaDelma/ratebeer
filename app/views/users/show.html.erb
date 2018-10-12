@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <h2><%= @user.username %></h2>
@@ -11,7 +10,7 @@
 
 <% if not @clubs.empty? %>
 <p>
-  <h3>Clubs:</h3>
+  <h3>Club memberships:</h3>
   <ul>
   <% @clubs.each do |club| %>
     <li><%= link_to club, club %></li>
@@ -22,20 +21,33 @@
 
 <p>
   <h3>Ratings:</h3>
-  <ul>
-  <% @user.ratings.each do |rating| %>
-    <li>
-      <%= rating %>
-      <% if @user == current_user %>
-        <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </li>
-  <% end %>
-  </ul>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% @user.ratings.each do |rating| %>
+      <tr>
+        <td>
+          <%= rating %>
+        </td>
+        <td>
+          <% if @user == current_user %>
+            <%= button_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </p>
 
 <% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary" %>
+  <%= button_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
 <% end %>
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', users_path, class:"btn btn-primary" %>

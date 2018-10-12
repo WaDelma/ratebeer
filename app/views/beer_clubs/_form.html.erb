@@ -10,23 +10,22 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field form-group row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :name, class:"col-sm-7" %>
   </div>
 
-  <div class="field">
-    <%= form.label :founded %>
-    <%= form.number_field :founded %>
+  <div class="field form-group row">
+    <%= form.label :founded, class:"col-sm-2 col-form-label" %>
+    <%= select_year(Time.current.year, start_year: 1040, end_year: Time.current.year, field_name: :founded, prefix: :beer_club, class:"col-sm-7") %>
   </div>
 
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
+  <div class="field form-group row">
+    <%= form.label :city, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :city, class:"col-sm-7" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions form-group row">
+    <%= form.submit class:"btn btn-primary" %>
   </div>
 <% end %>

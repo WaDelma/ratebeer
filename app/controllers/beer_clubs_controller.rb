@@ -12,7 +12,7 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1.json
   def show
     @membership = current_user.memberships.where(beer_club_id: params[:id]).limit(1).first;
-    if @membership then
+    if @membership
       @member = true
     else
       @member = false

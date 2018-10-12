@@ -13,7 +13,15 @@
     </div>
   <% end %>
 
-  <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s, selected: @rating.beer_id) %>
-  score: <%= f.number_field :score %>
-  <%= f.submit %>
+  <div class="field form-group row">
+    <%= f.label :beer_id, class:"col-sm-2 col-form-label" %>
+    <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s, selected: @rating.beer_id), class:"col-sm-7" %>
+  </div>
+  <div class="field form-group row">
+    <%= f.label :score, class:"col-sm-2 col-form-label" %>
+    <%= f.number_field :score, min: 0, max: 50, class:"col-sm-7" %>
+  </div>
+  <div class="field form-group row">
+    <%= f.submit class:"btn btn-primary" %>
+  </div>
 <% end %>

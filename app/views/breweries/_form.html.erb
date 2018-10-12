@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :brewery_name %>
+  <div class="field form-group row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <%= form.text_field :name, id: :brewery_name, class:"col-sm-7" %>
   </div>
 
-  <div class="field">
-    <%= form.label :year %>
-    <%= form.number_field :year, id: :brewery_year %>
+  <div class="field form-group row">
+    <%= form.label :year, class:"col-sm-2 col-form-label" %>
+    <%= form.number_field :year, id: :brewery_year, class:"col-sm-7" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions form-group row">
+    <%= form.submit class:"btn btn-primary" %>
   </div>
 <% end %>

@@ -4,12 +4,12 @@ class PlacesController < ApplicationController
 
   def show
     @place = BeermappingApi.get_place params[:id]
-    if @place.url
-      @place.url = URI.unescape @place.url
-      if !URI.parse(@place.url).scheme
-        @place.url = "https://#{@place.url}"
-      end
-    end
+    return if !@place.url
+
+    @place.url = URI.decode_www_form(@place.url)[0][0]
+    return if URI.parse(@place.url).scheme
+
+    @place.url = "https://#{@place.url}"
   end
 
   def search
