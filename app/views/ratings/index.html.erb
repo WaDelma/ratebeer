@@ -24,7 +24,7 @@ Number of ratings: <%= @ratings %>
   <h3>Most recent ratings<h3>
   <ol>
     <% @recent.each do |rating| %>
-      <li> <%= link_to rating.user, rating.user %> rated <%= link_to rating.beer, rating.beer %>: <b><%= rating.score %></b>
+      <li> <%= link_to rating.user, rating.user %> rated <%= link_to rating.beer.name, rating.beer %>: <b><%= rating.score %></b>
     <% end %>
   </ol>
 </p>

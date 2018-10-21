@@ -1,4 +1,3 @@
-# api_key = "a73af3e0c7c009bdde78a3aa29ac3910"
 class BeermappingApi
   def self.places_in(city)
     return [] if city.empty?

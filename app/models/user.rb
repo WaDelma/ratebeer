@@ -4,12 +4,23 @@ class User < ApplicationRecord
                        length: { in: 3..30 }
   validates :password, format: { with: /([[:digit:]].*[[:upper:]])|([[:upper:]].*[[:digit:]])/,
                                  message: "has to have atleast one digit and uppercase letter" },
-                       length: { minimum: 4 }
+                       length: { minimum: 4 },
+                       unless: :oauth
+  validates :oauth, inclusion: { in: [true] },
+                     unless: :password
   has_secure_password
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
+
+  def potential_beer_clubs
+    beer_clubs.where "memberships.confirmed": [false, nil]
+  end
+
+  def actual_beer_clubs
+    beer_clubs.where "memberships.confirmed": true
+  end
 
   def to_s
     username
@@ -22,7 +33,10 @@ class User < ApplicationRecord
   end
 
   def self.most_rated(nth)
-    all.map.sort_by{ |b| -b.ratings.count }.take(nth)
+    all.joins(:ratings)
+      .group(:id)
+      .order(Arel.sql('count(ratings.score) DESC'))
+      .take(nth)
   end
 
   def favorite_style

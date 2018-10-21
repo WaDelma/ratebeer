@@ -15,6 +15,17 @@
 </p>
 <% end %>
 
+<% if @member && !@beer_club.candidates.empty? %>
+<p>
+  Member candidates:
+  <ul>
+  <% @beer_club.candidates.each do |member| %>
+    <li><%= link_to member.user.username, member.user %> <%= button_to "confirm", confirm_membership_path(member.id), class:"btn btn-primary btn-sm" %></li>
+  <% end %>
+  </ul>
+</p>
+<% end %>
+
 <% if current_user %>
   <p>
   <% if @member %>  
@@ -22,7 +33,7 @@
       <%= f.hidden_field :beer_club_id %>
       <%= f.submit value: "End the membership", class:"btn btn-danger" %>
     <% end %>
-  <% else %>
+  <% elsif @membership.nil? %>
     <%= form_for(@membership) do |f| %>
       <%= f.hidden_field :beer_club_id %>
       <%= f.submit value:"Join the club", class:"btn btn-primary" %>

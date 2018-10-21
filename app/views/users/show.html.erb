@@ -18,14 +18,24 @@
 </p>
 
 <% if not @clubs.empty? %>
-<p>
-  <h3>Club memberships:</h3>
-  <ul>
-  <% @clubs.each do |club| %>
-    <li><%= link_to club, club %></li>
-  <% end %>
-  </ul>
-</p>
+  <p>
+    <h3>Club memberships:</h3>
+    <ul>
+    <% @clubs.each do |club| %>
+      <li><%= link_to club, club %></li>
+    <% end %>
+    </ul>
+  </p>
+<% end %>
+<% if @user == current_user and not @candidate_clubs.empty? %>
+  <p>
+    <h3>Club membership requests:</h3>
+    <ul>
+    <% @candidate_clubs.each do |club| %>
+      <li><%= link_to club, club %></li>
+    <% end %>
+    </ul>
+  </p>
 <% end %>
 
 <% if not @user.ratings.empty? %>

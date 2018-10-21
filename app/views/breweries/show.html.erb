@@ -1,3 +1,4 @@
+<% cache @brewery do %> 
 <p>
   <h1>
     <%= @brewery.name %>
@@ -22,6 +23,7 @@
   <% end %>
   <br/>
 </p>
+<% end %>
 
 <%= edit_and_destroy_buttons(@brewery) %>
 <%= link_to "Change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" %>

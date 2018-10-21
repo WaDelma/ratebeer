@@ -2,7 +2,9 @@
 
 <% @styles.each do |style| %>
     <h2><%= style.name %></h2>
+    <p>
     <%= style.description %>
+    </p>
     <b>Beers:</b>
     <ul>
         <% style.beers.each do |beer| %>

@@ -7,7 +7,11 @@ module RatingAverage
 
   module ClassMethods
     def top(nth)
-      all.map.sort_by{ |b| -b.average_rating || 0 }.take(nth)
+      all.joins(:ratings)
+        .group(:id)
+        .order(Arel.sql('sum(ratings.score) / count(ratings.score) DESC'))
+        .includes(:ratings)
+        .take(nth)
     end
   end
 

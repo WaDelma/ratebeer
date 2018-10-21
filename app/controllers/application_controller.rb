@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     current_user.admin
   end
 
+  def member(club)
+    return nil if current_user.nil?
+
+    current_user.memberships.where(beer_club_id: club).limit(1).first
+  end
+
   def ensure_that_signed_in
     redirect_to signin_path, notice: 'you should be signed in' if current_user.nil?
   end

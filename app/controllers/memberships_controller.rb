@@ -1,4 +1,5 @@
 class MembershipsController < ApplicationController
+  before_action :ensure_that_signed_in, except: [:index, :show]
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
 
   # GET /memberships
@@ -35,6 +36,15 @@ class MembershipsController < ApplicationController
         format.json { render json: @membership.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def confirm
+    membership = Membership.find(params[:id])
+    member = member(membership.beer_club_id)
+    redirect_to signin_path, notice: 'only confirmed members can do this action' if member && !member.confirmed
+    membership.confirmed = true
+    membership.save
+    redirect_to beer_club_path(membership.beer_club_id), notice: "#{membership.user} confirmed as a member"
   end
 
   # PATCH/PUT /memberships/1

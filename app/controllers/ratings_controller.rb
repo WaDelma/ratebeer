@@ -1,11 +1,24 @@
 class RatingsController < ApplicationController
   def index
-    @ratings = Rating.count
-    @beers = Beer.top 3
-    @breweries = Brewery.top 3
-    @styles = Style.top 3
-    @users = User.most_rated 5
-    @recent = Rating.recent
+    # Sped up counting ratings by doing them asyncronously only every 3 minutes
+    # and by optimising all of the queries
+    @semaphore ||= Mutex.new
+    @semaphore.synchronize do
+      unless Rails.cache.read "ratings computed"
+        if Rails.cache.read("beer top 3").nil?
+          RatingsJob.new.perform
+        else
+          RatingsJob.perform_async
+        end
+        Rails.cache.write("ratings computed", true, expires_in: 3.minutes)
+      end
+    end
+    @beers = Rails.cache.read "beer top 3"
+    @breweries = Rails.cache.read "brewery top 3"
+    @styles = Rails.cache.read "style top 3"
+    @users = Rails.cache.read "user most rated 5"
+    @ratings = Rails.cache.read "rating count"
+    @recent = Rails.cache.read "rating recent"
   end
 
   def new

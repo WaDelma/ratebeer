@@ -14,6 +14,20 @@ class SessionsController < ApplicationController
     end
   end
 
+  def create_oauth
+    auth = request.env['omniauth.auth']
+    user = User.find_by username: auth["info"]["nickname"], oauth: auth["uid"]
+    if user.nil?
+      p = SecureRandom.hex(10)
+      user = User.create username: auth["info"]["nickname"], oauth: auth["uid"], password: p, password_confirmation: p
+      if user.id.nil?
+        return redirect_to signin_path, notice: "Oauth authentication failed"
+      end
+    end
+    session[:user_id] = user.id
+    redirect_to user, notice: "Welcome back!"
+  end
+
   def destroy
     session[:user_id] = nil
 
