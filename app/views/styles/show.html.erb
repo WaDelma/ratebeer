@@ -1,0 +1,12 @@
+<h1><%= @style.name %></h1>
+<p>
+<%= @style.description %>
+</p>
+<b>Beers:</b>
+<ul>
+    <% @style.beers.each do |beer| %>
+        <li><%= beer %></li>
+    <% end %>
+</ul>
+<%= edit_and_destroy_buttons(@style) %>
+<%= link_to 'Back', styles_path, class:"btn btn-primary" %>

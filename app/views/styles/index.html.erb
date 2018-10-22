@@ -1,14 +1,19 @@
 <h1>Styles</h1>
 
-<% @styles.each do |style| %>
-    <h2><%= style.name %></h2>
-    <p>
-    <%= style.description %>
-    </p>
-    <b>Beers:</b>
-    <ul>
-        <% style.beers.each do |beer| %>
-            <li><%= beer %></li>
-        <% end %>
-    </ul>
-<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @styles.each do |style| %>
+      <tr>
+        <td><%= link_to style.name, style %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to('New Style', new_style_path, class:"btn btn-primary") if current_user %>
