@@ -9,11 +9,11 @@ class BeerClubsController < ApplicationController
     order = params[:order] || 'name'
 
     @beer_clubs = case order
-      when 'name' then BeerClub.order(:name)
-      when 'founded' then BeerClub.order(:founded)
-      when 'city' then BeerClub.order(:city)
-      else BeerClub.order(:name)
-    end
+                  when 'name' then BeerClub.order(:name)
+                  when 'founded' then BeerClub.order(:founded)
+                  when 'city' then BeerClub.order(:city)
+                  else BeerClub.order(:name)
+                  end
   end
 
   # GET /beer_clubs/1
@@ -42,7 +42,7 @@ class BeerClubsController < ApplicationController
   # POST /beer_clubs.json
   def create
     @beer_club = BeerClub.new(beer_club_params)
-    
+
     respond_to do |format|
       if @beer_club.save
         current_user.memberships.create beer_club: @beer_club, confirmed: true

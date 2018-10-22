@@ -7,7 +7,7 @@ class User < ApplicationRecord
                        length: { minimum: 4 },
                        unless: :oauth
   validates :oauth, inclusion: { in: [true] },
-                     unless: :password
+                    unless: :password
   has_secure_password
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
@@ -34,9 +34,9 @@ class User < ApplicationRecord
 
   def self.most_rated(nth)
     all.joins(:ratings)
-      .group(:id)
-      .order(Arel.sql('count(ratings.score) DESC'))
-      .take(nth)
+       .group(:id)
+       .order(Arel.sql('count(ratings.score) DESC'))
+       .take(nth)
   end
 
   def favorite_style

@@ -1,18 +1,8 @@
 class RatingsController < ApplicationController
   def index
-    # Sped up counting ratings by doing them asyncronously only every 3 minutes
+    # Sped up counting of the ratings by doing them asyncronously only every 3 minutes
     # and by optimising all of the queries
-    @semaphore ||= Mutex.new
-    @semaphore.synchronize do
-      unless Rails.cache.read "ratings computed"
-        if Rails.cache.read("beer top 3").nil?
-          RatingsJob.new.perform
-        else
-          RatingsJob.perform_async
-        end
-        Rails.cache.write("ratings computed", true, expires_in: 3.minutes)
-      end
-    end
+    try_update_cache
     @beers = Rails.cache.read "beer top 3"
     @breweries = Rails.cache.read "brewery top 3"
     @styles = Rails.cache.read "style top 3"
@@ -43,5 +33,21 @@ class RatingsController < ApplicationController
     @rating = Rating.find(params[:id])
     @rating.delete if current_user == @rating.user
     redirect_to user_path(current_user)
+  end
+
+  private
+
+  def try_update_cache
+    @semaphore ||= Mutex.new
+    @semaphore.synchronize do
+      unless Rails.cache.read "ratings computed"
+        if Rails.cache.read("beer top 3").nil?
+          RatingsJob.new.perform
+        else
+          RatingsJob.perform_async
+        end
+        Rails.cache.write("ratings computed", true, expires_in: 3.minutes)
+      end
+    end
   end
 end

@@ -8,10 +8,10 @@ module RatingAverage
   module ClassMethods
     def top(nth)
       all.joins(:ratings)
-        .group(:id, "ratings.id")
-        .order(Arel.sql('sum(ratings.score) / count(ratings.score) DESC'))
-        .includes(:ratings)
-        .take(nth)
+         .group(:id, "ratings.id")
+         .order(Arel.sql('sum(ratings.score) / count(ratings.score) DESC'))
+         .includes(:ratings)
+         .take(nth)
     end
   end
 

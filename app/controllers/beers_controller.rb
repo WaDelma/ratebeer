@@ -11,11 +11,11 @@ class BeersController < ApplicationController
     return if request.format.html? && fragment_exist?("beerlist-#{@order}")
 
     @beers = case @order
-      when 'name' then Beer.includes(:brewery, :style).order("lower(name)")
-      when 'brewery' then Beer.includes(:brewery, :style).joins(:brewery).order("lower(breweries.name)")
-      when 'style' then Beer.includes(:brewery, :style).joins(:style).order("lower(styles.name)")
-      else Beer.includes(:brewery, :style).all
-    end
+             when 'name' then Beer.includes(:brewery, :style).order("lower(name)")
+             when 'brewery' then Beer.includes(:brewery, :style).joins(:brewery).order("lower(breweries.name)")
+             when 'style' then Beer.includes(:brewery, :style).joins(:style).order("lower(styles.name)")
+             else Beer.includes(:brewery, :style).all
+             end
   end
 
   # GET /beers/1
